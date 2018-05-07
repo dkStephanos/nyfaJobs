@@ -16,9 +16,21 @@ namespace NYFAJobs.Controllers
         private BoardContext db = new BoardContext();
 
         // GET: Candidate
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Candidates.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var candidates = from s in db.Candidates
+                             select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    candidates = candidates.OrderByDescending(s => s.LastName);
+                    break;
+                default:
+                    candidates = candidates.OrderBy(s => s.LastName);
+                    break;
+            }
+            return View(candidates.ToList());
         }
 
         // GET: Candidate/Details/5
