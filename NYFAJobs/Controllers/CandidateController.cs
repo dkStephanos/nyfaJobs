@@ -16,11 +16,19 @@ namespace NYFAJobs.Controllers
         private BoardContext db = new BoardContext();
 
         // GET: Candidate
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
             var candidates = from s in db.Candidates
                              select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                candidates = candidates.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":
