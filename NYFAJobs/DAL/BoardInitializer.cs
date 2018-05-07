@@ -27,13 +27,13 @@ namespace NYFAJobs.DAL
             context.SaveChanges();
             var jobs = new List<Job>
             {
-            new Job{JobID=1050,Title="Receptionist",PoisitionType="Full Time",Salary=40000.0},
-            new Job{JobID=4022,Title="Studio Artist",PoisitionType="Part Time",Salary=30000.0,},
-            new Job{JobID=4041,Title="Graphic Designer",PoisitionType="Apprentice",Salary=35000.0,},
-            new Job{JobID=1045,Title="Seamstress",PoisitionType="Intern",Salary=4000.0,},
-            new Job{JobID=3141,Title="Painting Prof.",PoisitionType="Tenure",Salary=55000.0,},
-            new Job{JobID=2021,Title="Administrator",PoisitionType="Full Time",Salary=100000.0,},
-            new Job{JobID=2042,Title="Column Writer",PoisitionType="Freelance",Salary=48000.0,}
+            new Job{JobID=1050,Title="Receptionist",PositionType="Full Time",Salary=40000.0},
+            new Job{JobID=4022,Title="Studio Artist",PositionType="Part Time",Salary=30000.0,},
+            new Job{JobID=4041,Title="Graphic Designer",PositionType="Apprentice",Salary=35000.0,},
+            new Job{JobID=1045,Title="Seamstress",PositionType="Intern",Salary=4000.0,},
+            new Job{JobID=3141,Title="Painting Prof.",PositionType="Tenure",Salary=55000.0,},
+            new Job{JobID=2021,Title="Administrator",PositionType="Full Time",Salary=100000.0,},
+            new Job{JobID=2042,Title="Column Writer",PositionType="Freelance",Salary=48000.0,}
             };
             jobs.ForEach(s => context.Jobs.Add(s));
             context.SaveChanges();

@@ -40,6 +40,7 @@
             <table class="table">
                 <tr>
                     <th>Job Title</th>
+                    <th>Position Type</th>
                     <th>Status</th>
                 </tr>
                 @foreach (var item in Model.Applications)
@@ -47,6 +48,9 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Job.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Job.PositionType)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Status)

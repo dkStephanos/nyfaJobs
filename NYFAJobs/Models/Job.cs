@@ -11,7 +11,7 @@ namespace NYFAJobs.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int JobID { get; set; }
         public string Title { get; set; }
-        public string PoisitionType { get; set; }
+        public string PositionType { get; set; }
         public double Salary { get; set; }
 
         public virtual ICollection<Application> Applications { get; set; }
