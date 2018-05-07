@@ -47,15 +47,22 @@ namespace NYFAJobs.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Degree")] Candidate candidate)
+        public ActionResult Create([Bind(Include = "LastName, FirstName, Degree")] Candidate candidate)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Candidates.Add(candidate);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Candidates.Add(candidate);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
             return View(candidate);
         }
 
