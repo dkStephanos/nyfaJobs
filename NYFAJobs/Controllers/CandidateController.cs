@@ -84,25 +84,43 @@ namespace NYFAJobs.Controllers
         // POST: Candidate/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,Degree")] Candidate candidate)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(candidate).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(candidate);
-        }
-
-        // GET: Candidate/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult EditPost(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var candidateToUpdate = db.Candidates.Find(id);
+            if (TryUpdateModel(candidateToUpdate, "",
+               new string[] { "LastName", "FirstName", "Degree" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(candidateToUpdate);
+        }
+
+        // GET: Candidate/Delete/5
+        public ActionResult Delete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             Candidate candidate = db.Candidates.Find(id);
             if (candidate == null)
@@ -113,13 +131,21 @@ namespace NYFAJobs.Controllers
         }
 
         // POST: Candidate/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            Candidate candidate = db.Candidates.Find(id);
-            db.Candidates.Remove(candidate);
-            db.SaveChanges();
+            try
+            {
+                Candidate candidateToDelete = new Candidate() { ID = id };
+                db.Entry(candidateToDelete).State = EntityState.Deleted;
+                db.SaveChanges();
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 
