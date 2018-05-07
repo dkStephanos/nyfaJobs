@@ -14,7 +14,8 @@
 {
     <p>
         Find by name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
+        Filter by degree: @Html.DropDownList("candidateDegree", "All")
+        <input type="submit" value="Filter" />
     </p>
 }
 <table class="table">

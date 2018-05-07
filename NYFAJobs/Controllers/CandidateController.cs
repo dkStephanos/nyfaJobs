@@ -16,9 +16,18 @@ namespace NYFAJobs.Controllers
         private BoardContext db = new BoardContext();
 
         // GET: Candidate
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, string candidateDegree)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            var DegreeLst = new List<string>();
+
+            var DegreeQry = from d in db.Candidates
+                           orderby d.Degree
+                           select d.Degree;
+
+            DegreeLst.AddRange(DegreeQry.Distinct());
+            ViewBag.candidateDegree = new SelectList(DegreeLst);
 
             var candidates = from s in db.Candidates
                              select s;
@@ -27,6 +36,11 @@ namespace NYFAJobs.Controllers
             {
                 candidates = candidates.Where(s => s.LastName.Contains(searchString)
                                        || s.FirstName.Contains(searchString));
+            }
+
+            if (!String.IsNullOrEmpty(candidateDegree))
+            {
+                candidates = candidates.Where(x => x.Degree == candidateDegree);
             }
 
             switch (sortOrder)
