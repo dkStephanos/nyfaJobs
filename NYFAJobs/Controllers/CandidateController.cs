@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using NYFAJobs.DAL;
 using NYFAJobs.Models;
+using PagedList;
 
 namespace NYFAJobs.Controllers
 {
@@ -16,9 +17,21 @@ namespace NYFAJobs.Controllers
         private BoardContext db = new BoardContext();
 
         // GET: Candidate
-        public ActionResult Index(string sortOrder, string searchString, string candidateDegree)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, string candidateDegree, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
 
             var DegreeLst = new List<string>();
 
@@ -52,7 +65,9 @@ namespace NYFAJobs.Controllers
                     candidates = candidates.OrderBy(s => s.LastName);
                     break;
             }
-            return View(candidates.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(candidates.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Candidate/Details/5
