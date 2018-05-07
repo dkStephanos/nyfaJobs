@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NYFAJobs", "NYFAJobs\NYFAJobs.csproj", "{AEBCD1CB-7979-49EF-8D6C-91E003AA22E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NYFAJobs.Tests", "NYFAJobs.Tests\NYFAJobs.Tests.csproj", "{09A43F36-51C9-4B6A-BC76-C46BF9279548}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEBCD1CB-7979-49EF-8D6C-91E003AA22E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEBCD1CB-7979-49EF-8D6C-91E003AA22E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEBCD1CB-7979-49EF-8D6C-91E003AA22E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEBCD1CB-7979-49EF-8D6C-91E003AA22E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09A43F36-51C9-4B6A-BC76-C46BF9279548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09A43F36-51C9-4B6A-BC76-C46BF9279548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09A43F36-51C9-4B6A-BC76-C46BF9279548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09A43F36-51C9-4B6A-BC76-C46BF9279548}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
