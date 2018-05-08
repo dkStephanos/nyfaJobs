@@ -42,7 +42,7 @@ namespace NYFAJobs.Controllers
                            select d.Degree;
 
             DegreeLst.AddRange(DegreeQry.Distinct());
-            ViewBag.candidateDegree = new SelectList(DegreeLst);
+            ViewBag.candidateDegree = new SelectList(DegreeLst); 
 
             var candidates = from s in db.Candidates
                              select s;
