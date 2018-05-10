@@ -20,7 +20,7 @@ namespace NYFAJobs.Models
         public string FirstName { get; set; }
 
         [DisplayFormat(NullDisplayText = "No degree")]
-        public string? Degree { get; set; }
+        public string Degree { get; set; }
 
         [Display(Name = "Full Name")]
         public string FullName
