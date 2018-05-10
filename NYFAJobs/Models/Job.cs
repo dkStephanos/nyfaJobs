@@ -10,8 +10,6 @@ namespace NYFAJobs.Models
 {
     public class Job
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Number")]
         public int JobID { get; set; }
 
         [StringLength(50, MinimumLength = 3)]
